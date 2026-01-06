@@ -4,37 +4,162 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOPO | RFL•★•REAL</title>
-    <link rel="stylesheet" href="style.css">
+    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS - O ESTILO DO SITE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden; /* Mantém o foco na entrada */
+            background-color: #000;
+        }
+
+        /* Efeito Parallax Background */
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 110%; 
+            height: 110%;
+            /* Substitua o link abaixo pela sua foto épica do Avakin Life */
+            background: url('https://images.unsplash.com/photo-1614850523296-d8c1af93d400?ixlib=rb-4.0.3') no-repeat center center; 
+            background-size: cover;
+            z-index: -2;
+            transform: translate(-5%, -5%);
+            transition: transform 0.1s ease-out;
+            will-change: transform;
+        }
+
+        /* Camada escura para o texto brilhar */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(30,0,60,0.5) 100%);
+            z-index: -1;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand-container {
+            animation: fadeIn 2s ease-in;
+        }
+
+        .brand-name {
+            font-size: 1.5rem;
+            letter-spacing: 8px;
+            color: #00d4ff;
+            text-shadow: 0 0 15px #00d4ff;
+            margin-bottom: 5px;
+        }
+
+        .site-title {
+            font-size: clamp(4rem, 15vw, 9rem); /* Tamanho adaptável para celular */
+            font-weight: 900;
+            text-transform: uppercase;
+            background: linear-gradient(to bottom, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 25px rgba(255,255,255,0.4));
+            line-height: 0.9;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            margin-top: 20px;
+            letter-spacing: 2px;
+            opacity: 0.7;
+            font-weight: 400;
+        }
+
+        /* Botão Estilizado */
+        .enter-btn {
+            margin-top: 60px;
+            padding: 18px 50px;
+            background: transparent;
+            border: 2px solid #00d4ff;
+            color: #00d4ff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .enter-btn:hover {
+            background: #00d4ff;
+            color: #000;
+            box-shadow: 0 0 40px #00d4ff;
+            transform: scale(1.05);
+        }
+
+        /* Animação de entrada */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
 
-    <div class="parallax-bg"></div>
-
+    <div class="parallax-bg" id="bg"></div>
     <div class="overlay"></div>
 
     <main class="hero">
         <div class="brand-container">
-            <h2 class="brand-name">RFL•★•REAL</h2>
+            <p class="brand-name">RFL•★•REAL</p>
             <h1 class="site-title">TOPO</h1>
-            <p class="tagline">Onde a comunidade Avakin Life se encontra.</p>
+            <p class="tagline">A EXPERIÊNCIA DEFINITIVA NO AVAKIN LIFE</p>
         </div>
 
-        <button class="enter-btn" onclick="startExperience()">INICIAR JORNADA</button>
+        <button class="enter-btn" onclick="entrar()">INICIAR JORNADA</button>
     </main>
 
-    <audio id="bg-music" loop>
-        <source src="SUA_MUSICA_DO_AVAKIN.mp3" type="audio/mpeg">
+    <audio id="musica" loop>
+        <source src="sua-musica.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        function startExperience() {
-            // Inicia a música
-            const audio = document.getElementById('bg-music');
-            audio.play().catch(e => console.log("Áudio aguardando interação."));
+        // Lógica de Movimento Parallax com o Mouse
+        const bg = document.getElementById('bg');
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
             
-            // Aqui adicionaremos a lógica para rolar para o Feed/Chat
-            alert("Bem-vindo ao TOPO, RFL•★•REAL! O sistema está sendo carregado...");
+            // Move o fundo levemente na direção oposta ao mouse
+            bg.style.transform = `translate(-${5 + x * 2}%, -${5 + y * 2}%)`;
+        });
+
+        // Função do Botão
+        function entrar() {
+            const musica = document.getElementById('musica');
+            musica.play().catch(() => console.log("Música aguardando permissão do navegador."));
+            
+            alert("RFL•★•REAL: O sistema TOPO está sendo inicializado!");
+            // No futuro, aqui o JavaScript fará o scroll para o Chat e Mural.
         }
     </script>
 </body>
