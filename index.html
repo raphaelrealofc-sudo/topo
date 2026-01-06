@@ -4,162 +4,190 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOPO | RFL•★•REAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
-
     <style>
-        /* CSS - O ESTILO DO SITE */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* CSS INTEGRADO */
+        :root {
+            --primary: #00d4ff;
+            --admin-gold: #ffd700;
+            --bg-dark: #0a0a0a;
+            --glass: rgba(255, 255, 255, 0.1);
         }
 
-        body, html {
-            height: 100%;
-            font-family: 'Montserrat', sans-serif;
-            overflow: hidden; /* Mantém o foco na entrada */
-            background-color: #000;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg-dark); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
-        /* Efeito Parallax Background */
-        .parallax-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 110%; 
-            height: 110%;
-            /* Substitua o link abaixo pela sua foto épica do Avakin Life */
-            background: url('https://images.unsplash.com/photo-1614850523296-d8c1af93d400?ixlib=rb-4.0.3') no-repeat center center; 
-            background-size: cover;
-            z-index: -2;
-            transform: translate(-5%, -5%);
-            transition: transform 0.1s ease-out;
-            will-change: transform;
-        }
-
-        /* Camada escura para o texto brilhar */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(30,0,60,0.5) 100%);
-            z-index: -1;
-        }
-
-        .hero {
+        /* PÁGINA DE ENTRADA (HERO) */
+        #hero {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            position: relative;
             text-align: center;
-            color: white;
-            position: relative;
-            z-index: 1;
         }
 
-        .brand-container {
-            animation: fadeIn 2s ease-in;
+        .parallax-bg {
+            position: absolute; top: 0; left: 0; width: 110%; height: 110%;
+            background: url('https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=80') no-repeat center;
+            background-size: cover; z-index: -2; transform: translate(-5%, -5%); transition: 0.1s;
         }
 
-        .brand-name {
-            font-size: 1.5rem;
-            letter-spacing: 8px;
-            color: #00d4ff;
-            text-shadow: 0 0 15px #00d4ff;
-            margin-bottom: 5px;
-        }
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: -1; }
 
-        .site-title {
-            font-size: clamp(4rem, 15vw, 9rem); /* Tamanho adaptável para celular */
-            font-weight: 900;
-            text-transform: uppercase;
-            background: linear-gradient(to bottom, #fff, #888);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 25px rgba(255,255,255,0.4));
-            line-height: 0.9;
-        }
+        .site-title { font-size: 6rem; font-weight: 900; letter-spacing: -2px; }
+        .brand-name { color: var(--primary); letter-spacing: 5px; text-shadow: 0 0 10px var(--primary); }
 
-        .tagline {
-            font-size: 1.1rem;
-            margin-top: 20px;
-            letter-spacing: 2px;
-            opacity: 0.7;
-            font-weight: 400;
-        }
-
-        /* Botão Estilizado */
         .enter-btn {
-            margin-top: 60px;
-            padding: 18px 50px;
-            background: transparent;
-            border: 2px solid #00d4ff;
-            color: #00d4ff;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            border-radius: 5px;
-            position: relative;
-            overflow: hidden;
+            margin-top: 30px; padding: 15px 40px; background: transparent; 
+            border: 2px solid var(--primary); color: var(--primary); cursor: pointer;
+            font-weight: bold; transition: 0.3s;
         }
+        .enter-btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 20px var(--primary); }
 
-        .enter-btn:hover {
-            background: #00d4ff;
-            color: #000;
-            box-shadow: 0 0 40px #00d4ff;
-            transform: scale(1.05);
-        }
+        /* CONTEÚDO PRINCIPAL (MURAL E CHAT) */
+        #main-content { display: none; padding: 50px 20px; max-width: 1200px; margin: auto; }
 
-        /* Animação de entrada */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .grid-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
+
+        /* MURAL DE POSTS */
+        .mural-section { background: var(--glass); padding: 20px; border-radius: 15px; }
+        .post-card { background: rgba(0,0,0,0.5); padding: 15px; margin-bottom: 20px; border-radius: 10px; border-left: 4px solid var(--primary); position: relative; }
+        .post-admin { border-left: 4px solid var(--admin-gold); background: rgba(255, 215, 0, 0.05); }
+        .admin-badge { color: var(--admin-gold); font-size: 0.8rem; font-weight: bold; }
+        .delete-btn { position: absolute; top: 10px; right: 10px; cursor: pointer; color: red; }
+
+        /* CHAT GLOBAL */
+        .chat-section { background: var(--glass); padding: 20px; border-radius: 15px; height: 600px; display: flex; flex-direction: column; }
+        #chat-messages { flex-grow: 1; overflow-y: auto; margin-bottom: 10px; font-size: 0.9rem; }
+        .chat-msg { margin-bottom: 8px; padding: 5px; border-radius: 5px; background: rgba(255,255,255,0.05); }
+
+        input, textarea { width: 100%; padding: 10px; background: #222; border: 1px solid #444; color: white; margin-top: 10px; }
+        .submit-btn { background: var(--primary); border: none; padding: 10px; width: 100%; margin-top: 5px; cursor: pointer; font-weight: bold; }
+
+        @media (max-width: 768px) { .grid-layout { grid-template-columns: 1fr; } .site-title { font-size: 3rem; } }
     </style>
 </head>
 <body>
 
-    <div class="parallax-bg" id="bg"></div>
-    <div class="overlay"></div>
+    <section id="hero">
+        <div class="parallax-bg" id="bg"></div>
+        <div class="overlay"></div>
+        <p class="brand-name">RFL•★•REAL</p>
+        <h1 class="site-title">TOPO</h1>
+        <button class="enter-btn" onclick="iniciar()">INICIAR JORNADA</button>
+    </section>
 
-    <main class="hero">
-        <div class="brand-container">
-            <p class="brand-name">RFL•★•REAL</p>
-            <h1 class="site-title">TOPO</h1>
-            <p class="tagline">A EXPERIÊNCIA DEFINITIVA NO AVAKIN LIFE</p>
+    <section id="main-content">
+        <div class="grid-layout">
+            
+            <div class="mural-section">
+                <h2>MURAL DA COMUNIDADE</h2>
+                <div id="post-form">
+                    <textarea id="post-text" placeholder="Escreva algo ou cole link de imagem/vídeo..."></textarea>
+                    <button class="submit-btn" onclick="postar()">PUBLICAR NO MURAL</button>
+                </div>
+                <hr style="margin: 20px 0; opacity: 0.2;">
+                <div id="mural-feed">
+                    </div>
+            </div>
+
+            <div class="chat-section">
+                <h2>CHAT GLOBAL</h2>
+                <div id="chat-messages"></div>
+                <input type="text" id="chat-input" placeholder="Digite sua mensagem...">
+                <button class="submit-btn" onclick="enviarChat()">ENVIAR</button>
+            </div>
+
         </div>
+    </section>
 
-        <button class="enter-btn" onclick="entrar()">INICIAR JORNADA</button>
-    </main>
-
-    <audio id="musica" loop>
-        <source src="sua-musica.mp3" type="audio/mpeg">
-    </audio>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
 
     <script>
-        // Lógica de Movimento Parallax com o Mouse
+        // CONFIGURAÇÃO DO FIREBASE (Substitua pelos seus dados do Firebase Console)
+        const firebaseConfig = {
+            apiKey: "SUA_API_KEY",
+            authDomain: "SEU_PROJETO.firebaseapp.com",
+            projectId: "SEU_PROJETO",
+            storageBucket: "SEU_PROJETO.appspot.com",
+            messagingSenderId: "ID_AQUI",
+            appId: "APP_ID_AQUI"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // LÓGICA DE ENTRADA E PARALLAX
         const bg = document.getElementById('bg');
         document.addEventListener('mousemove', (e) => {
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            
-            // Move o fundo levemente na direção oposta ao mouse
+            let x = e.clientX / window.innerWidth;
+            let y = e.clientY / window.innerHeight;
             bg.style.transform = `translate(-${5 + x * 2}%, -${5 + y * 2}%)`;
         });
 
-        // Função do Botão
-        function entrar() {
-            const musica = document.getElementById('musica');
-            musica.play().catch(() => console.log("Música aguardando permissão do navegador."));
-            
-            alert("RFL•★•REAL: O sistema TOPO está sendo inicializado!");
-            // No futuro, aqui o JavaScript fará o scroll para o Chat e Mural.
+        function iniciar() {
+            document.getElementById('hero').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+            window.scrollTo(0,0);
+            carregarDados();
+        }
+
+        // FUNÇÃO PARA APAGAR (SÓ VOCÊ SABE A SENHA)
+        function deletar(id, colecao) {
+            const senha = prompt("Senha de Admin para deletar:");
+            if(senha === "123") { // TROQUE "123" PELA SUA SENHA
+                db.collection(colecao).doc(id).delete();
+            }
+        }
+
+        // MURAL E CHAT EM TEMPO REAL
+        function carregarDados() {
+            // Mural
+            db.collection("mural").orderBy("data", "desc").limit(50).onSnapshot(snap => {
+                const feed = document.getElementById('mural-feed');
+                feed.innerHTML = "";
+                snap.forEach(doc => {
+                    const p = doc.data();
+                    feed.innerHTML += `
+                        <div class="post-card ${p.admin ? 'post-admin' : ''}">
+                            ${p.admin ? '<span class="admin-badge">★ RFL•★•REAL (ADM)</span>' : '<span>Anônimo</span>'}
+                            <p>${p.texto}</p>
+                            <span class="delete-btn" onclick="deletar('${doc.id}', 'mural')">🗑️</span>
+                        </div>`;
+                });
+            });
+
+            // Chat
+            db.collection("chat").orderBy("data", "asc").limit(100).onSnapshot(snap => {
+                const chat = document.getElementById('chat-messages');
+                chat.innerHTML = "";
+                snap.forEach(doc => {
+                    const m = doc.data();
+                    chat.innerHTML += `<div class="chat-msg"><b>${m.user}:</b> ${m.texto} <span style="cursor:pointer" onclick="deletar('${doc.id}', 'chat')">x</span></div>`;
+                });
+                chat.scrollTop = chat.scrollHeight;
+            });
+        }
+
+        function postar() {
+            const txt = document.getElementById('post-text').value;
+            const isAdmin = confirm("Postar como Admin (RFL•★•REAL)?");
+            if(txt) {
+                db.collection("mural").add({ texto: txt, admin: isAdmin, data: Date.now() });
+                document.getElementById('post-text').value = "";
+            }
+        }
+
+        function enviarChat() {
+            const msg = document.getElementById('chat-input').value;
+            if(msg) {
+                db.collection("chat").add({ user: "Anônimo", texto: msg, data: Date.now() });
+                document.getElementById('chat-input').value = "";
+            }
         }
     </script>
 </body>
