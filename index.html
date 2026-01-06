@@ -7,26 +7,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
-        /* CSS INTEGRADO */
         :root {
             --primary: #00d4ff;
             --admin-gold: #ffd700;
-            --bg-dark: #0a0a0a;
-            --glass: rgba(255, 255, 255, 0.1);
+            --bg-dark: #050505;
+            --glass: rgba(255, 255, 255, 0.05);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         body { background: var(--bg-dark); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
-        /* PÁGINA DE ENTRADA (HERO) */
+        /* PÁGINA DE ENTRADA */
         #hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            text-align: center;
+            height: 100vh; display: flex; flex-direction: column; justify-content: center;
+            align-items: center; position: relative; text-align: center;
         }
 
         .parallax-bg {
@@ -35,39 +29,44 @@
             background-size: cover; z-index: -2; transform: translate(-5%, -5%); transition: 0.1s;
         }
 
-        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: -1; }
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.9) 100%); z-index: -1; }
 
-        .site-title { font-size: 6rem; font-weight: 900; letter-spacing: -2px; }
-        .brand-name { color: var(--primary); letter-spacing: 5px; text-shadow: 0 0 10px var(--primary); }
+        .site-title { font-size: clamp(3rem, 15vw, 7rem); font-weight: 900; letter-spacing: -2px; text-transform: uppercase; }
+        .brand-name { color: var(--primary); letter-spacing: 5px; text-shadow: 0 0 15px var(--primary); font-weight: 700; }
 
         .enter-btn {
-            margin-top: 30px; padding: 15px 40px; background: transparent; 
+            margin-top: 30px; padding: 18px 50px; background: transparent; 
             border: 2px solid var(--primary); color: var(--primary); cursor: pointer;
-            font-weight: bold; transition: 0.3s;
+            font-weight: bold; transition: 0.4s; letter-spacing: 2px;
         }
-        .enter-btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 20px var(--primary); }
+        .enter-btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 30px var(--primary); transform: scale(1.05); }
 
-        /* CONTEÚDO PRINCIPAL (MURAL E CHAT) */
-        #main-content { display: none; padding: 50px 20px; max-width: 1200px; margin: auto; }
+        /* CONTEÚDO PRINCIPAL */
+        #main-content { display: none; padding: 40px 15px; max-width: 1300px; margin: auto; animation: fadeIn 1s; }
 
-        .grid-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
+        .grid-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; }
 
-        /* MURAL DE POSTS */
-        .mural-section { background: var(--glass); padding: 20px; border-radius: 15px; }
-        .post-card { background: rgba(0,0,0,0.5); padding: 15px; margin-bottom: 20px; border-radius: 10px; border-left: 4px solid var(--primary); position: relative; }
-        .post-admin { border-left: 4px solid var(--admin-gold); background: rgba(255, 215, 0, 0.05); }
-        .admin-badge { color: var(--admin-gold); font-size: 0.8rem; font-weight: bold; }
-        .delete-btn { position: absolute; top: 10px; right: 10px; cursor: pointer; color: red; }
+        /* MURAL */
+        .mural-section { background: var(--glass); padding: 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); }
+        .post-card { background: rgba(20,20,20,0.8); padding: 20px; margin-bottom: 20px; border-radius: 12px; position: relative; border: 1px solid rgba(255,255,255,0.05); }
+        .post-admin { border: 2px solid var(--admin-gold); background: rgba(255, 215, 0, 0.05); box-shadow: 0 0 15px rgba(255, 215, 0, 0.1); }
+        .admin-badge { color: var(--admin-gold); font-size: 0.9rem; font-weight: 900; display: block; margin-bottom: 10px; }
+        .post-img { max-width: 100%; border-radius: 8px; margin-top: 10px; }
+        .delete-btn { position: absolute; top: 15px; right: 15px; cursor: pointer; opacity: 0.3; transition: 0.3s; }
+        .delete-btn:hover { opacity: 1; color: #ff4b4b; }
 
-        /* CHAT GLOBAL */
-        .chat-section { background: var(--glass); padding: 20px; border-radius: 15px; height: 600px; display: flex; flex-direction: column; }
-        #chat-messages { flex-grow: 1; overflow-y: auto; margin-bottom: 10px; font-size: 0.9rem; }
-        .chat-msg { margin-bottom: 8px; padding: 5px; border-radius: 5px; background: rgba(255,255,255,0.05); }
+        /* CHAT */
+        .chat-section { background: var(--glass); padding: 20px; border-radius: 20px; height: 70vh; display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,0.1); }
+        #chat-messages { flex-grow: 1; overflow-y: auto; margin-bottom: 15px; padding-right: 10px; }
+        .chat-msg { margin-bottom: 10px; padding: 10px; border-radius: 10px; background: rgba(255,255,255,0.03); border-left: 3px solid var(--primary); font-size: 0.9rem; }
 
-        input, textarea { width: 100%; padding: 10px; background: #222; border: 1px solid #444; color: white; margin-top: 10px; }
-        .submit-btn { background: var(--primary); border: none; padding: 10px; width: 100%; margin-top: 5px; cursor: pointer; font-weight: bold; }
+        input, textarea { width: 100%; padding: 15px; background: #111; border: 1px solid #333; color: white; border-radius: 8px; outline: none; transition: 0.3s; }
+        input:focus, textarea:focus { border-color: var(--primary); }
+        .submit-btn { background: var(--primary); border: none; padding: 15px; width: 100%; margin-top: 10px; cursor: pointer; font-weight: bold; border-radius: 8px; color: #000; transition: 0.3s; }
+        .submit-btn:hover { filter: brightness(1.2); }
 
-        @media (max-width: 768px) { .grid-layout { grid-template-columns: 1fr; } .site-title { font-size: 3rem; } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @media (max-width: 900px) { .grid-layout { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -77,30 +76,24 @@
         <div class="overlay"></div>
         <p class="brand-name">RFL•★•REAL</p>
         <h1 class="site-title">TOPO</h1>
-        <button class="enter-btn" onclick="iniciar()">INICIAR JORNADA</button>
+        <button class="enter-btn" onclick="iniciar()">ENTRAR NO SITE</button>
     </section>
 
     <section id="main-content">
         <div class="grid-layout">
-            
             <div class="mural-section">
-                <h2>MURAL DA COMUNIDADE</h2>
-                <div id="post-form">
-                    <textarea id="post-text" placeholder="Escreva algo ou cole link de imagem/vídeo..."></textarea>
-                    <button class="submit-btn" onclick="postar()">PUBLICAR NO MURAL</button>
-                </div>
-                <hr style="margin: 20px 0; opacity: 0.2;">
-                <div id="mural-feed">
-                    </div>
+                <h2 style="margin-bottom: 20px; color: var(--primary);">MURAL RFL•★•REAL</h2>
+                <textarea id="post-text" rows="3" placeholder="O que está acontecendo no Avakin? (Cole links de fotos aqui também)"></textarea>
+                <button class="submit-btn" onclick="postar()">PUBLICAR AGORA</button>
+                <div id="mural-feed" style="margin-top: 30px;"></div>
             </div>
 
             <div class="chat-section">
-                <h2>CHAT GLOBAL</h2>
+                <h2 style="margin-bottom: 20px; color: var(--primary);">CHAT GLOBAL</h2>
                 <div id="chat-messages"></div>
-                <input type="text" id="chat-input" placeholder="Digite sua mensagem...">
-                <button class="submit-btn" onclick="enviarChat()">ENVIAR</button>
+                <input type="text" id="chat-input" placeholder="Sua mensagem...">
+                <button class="submit-btn" onclick="enviarChat()">ENVIAR CHAT</button>
             </div>
-
         </div>
     </section>
 
@@ -108,20 +101,32 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
 
     <script>
-        // CONFIGURAÇÃO DO FIREBASE (Substitua pelos seus dados do Firebase Console)
+        // --- CONFIGURAÇÃO DO FIREBASE (COLE SEUS DADOS AQUI) ---
         const firebaseConfig = {
             apiKey: "SUA_API_KEY",
             authDomain: "SEU_PROJETO.firebaseapp.com",
             projectId: "SEU_PROJETO",
             storageBucket: "SEU_PROJETO.appspot.com",
-            messagingSenderId: "ID_AQUI",
-            appId: "APP_ID_AQUI"
+            messagingSenderId: "ID",
+            appId: "APP_ID"
         };
         
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        // LÓGICA DE ENTRADA E PARALLAX
+        // FILTRO DE PALAVRAS (Adicione as que quiser bloquear)
+        const blacklist = ["palavra1", "palavra2", "ofensa"]; 
+
+        function filtrar(texto) {
+            let t = texto;
+            blacklist.forEach(p => {
+                const regex = new RegExp(p, "gi");
+                t = t.replace(regex, "****");
+            });
+            return t;
+        }
+
+        // PARALLAX
         const bg = document.getElementById('bg');
         document.addEventListener('mousemove', (e) => {
             let x = e.clientX / window.innerWidth;
@@ -132,42 +137,39 @@
         function iniciar() {
             document.getElementById('hero').style.display = 'none';
             document.getElementById('main-content').style.display = 'block';
-            window.scrollTo(0,0);
             carregarDados();
         }
 
-        // FUNÇÃO PARA APAGAR (SÓ VOCÊ SABE A SENHA)
         function deletar(id, colecao) {
-            const senha = prompt("Senha de Admin para deletar:");
-            if(senha === "123") { // TROQUE "123" PELA SUA SENHA
+            const senha = prompt("Senha de Admin:");
+            if(senha === "123") { // Mude sua senha aqui!
                 db.collection(colecao).doc(id).delete();
             }
         }
 
-        // MURAL E CHAT EM TEMPO REAL
         function carregarDados() {
-            // Mural
-            db.collection("mural").orderBy("data", "desc").limit(50).onSnapshot(snap => {
+            db.collection("mural").orderBy("data", "desc").onSnapshot(snap => {
                 const feed = document.getElementById('mural-feed');
                 feed.innerHTML = "";
                 snap.forEach(doc => {
                     const p = doc.data();
+                    const isImg = p.texto.match(/\.(jpeg|jpg|gif|png)$/) != null;
                     feed.innerHTML += `
                         <div class="post-card ${p.admin ? 'post-admin' : ''}">
-                            ${p.admin ? '<span class="admin-badge">★ RFL•★•REAL (ADM)</span>' : '<span>Anônimo</span>'}
-                            <p>${p.texto}</p>
-                            <span class="delete-btn" onclick="deletar('${doc.id}', 'mural')">🗑️</span>
+                            ${p.admin ? '<span class="admin-badge">★ RFL•★•REAL (OFICIAL)</span>' : '<span style="opacity:0.5; font-size:0.8rem">Visitante Anônimo</span>'}
+                            <p style="margin-top:5px">${p.texto}</p>
+                            ${isImg ? `<img src="${p.texto}" class="post-img">` : ''}
+                            <span class="delete-btn" onclick="deletar('${doc.id}', 'mural')">DELETAR</span>
                         </div>`;
                 });
             });
 
-            // Chat
-            db.collection("chat").orderBy("data", "asc").limit(100).onSnapshot(snap => {
+            db.collection("chat").orderBy("data", "asc").limit(50).onSnapshot(snap => {
                 const chat = document.getElementById('chat-messages');
                 chat.innerHTML = "";
                 snap.forEach(doc => {
                     const m = doc.data();
-                    chat.innerHTML += `<div class="chat-msg"><b>${m.user}:</b> ${m.texto} <span style="cursor:pointer" onclick="deletar('${doc.id}', 'chat')">x</span></div>`;
+                    chat.innerHTML += `<div class="chat-msg"><b>${m.user}:</b> ${filtrar(m.texto)}</div>`;
                 });
                 chat.scrollTop = chat.scrollHeight;
             });
@@ -175,19 +177,17 @@
 
         function postar() {
             const txt = document.getElementById('post-text').value;
-            const isAdmin = confirm("Postar como Admin (RFL•★•REAL)?");
-            if(txt) {
-                db.collection("mural").add({ texto: txt, admin: isAdmin, data: Date.now() });
-                document.getElementById('post-text').value = "";
-            }
+            if(!txt) return;
+            const adm = confirm("Postar como RFL•★•REAL?");
+            db.collection("mural").add({ texto: filtrar(txt), admin: adm, data: Date.now() });
+            document.getElementById('post-text').value = "";
         }
 
         function enviarChat() {
             const msg = document.getElementById('chat-input').value;
-            if(msg) {
-                db.collection("chat").add({ user: "Anônimo", texto: msg, data: Date.now() });
-                document.getElementById('chat-input').value = "";
-            }
+            if(!msg) return;
+            db.collection("chat").add({ user: "Membro", texto: msg, data: Date.now() });
+            document.getElementById('chat-input').value = "";
         }
     </script>
 </body>
