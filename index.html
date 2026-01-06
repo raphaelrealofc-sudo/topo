@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PORTAL TOPO | RFL•★•REAL</title>
+    <link rel="icon" href="https://img.icons8.com/fluency/48/star.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -11,57 +12,78 @@
             --admin-gold: #ffd700;
             --bg-dark: #050505;
             --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(0, 212, 255, 0.2);
         }
 
+        /* CONFIGURAÇÕES GERAIS */
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { background: var(--bg-dark); color: white; font-family: 'Montserrat', sans-serif; line-height: 1.6; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; box-shadow: 0 0 10px var(--primary); }
+
+        body { background: var(--bg-dark); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(25px); filter: blur(10px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
 
         /* NAVBAR */
         .navbar {
             position: fixed; top: 0; width: 100%; padding: 15px 30px;
-            background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(15px);
+            background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(20px);
             display: flex; justify-content: space-between; align-items: center;
             z-index: 1000; border-bottom: 2px solid var(--primary);
         }
-        .nav-logo { font-weight: 900; color: var(--primary); text-decoration: none; font-size: 1.4rem; text-shadow: 0 0 10px var(--primary); }
-        .nav-links { display: flex; gap: 15px; }
-        .nav-links a { color: white; text-decoration: none; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+        .nav-logo { font-weight: 900; color: var(--primary); text-decoration: none; font-size: 1.4rem; text-shadow: 0 0 15px var(--primary); }
+        .nav-links a { color: white; text-decoration: none; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-left: 20px; transition: 0.4s; }
+        .nav-links a:hover { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
 
-        /* LAYOUT */
-        #main-content { padding: 100px 20px 50px; max-width: 1600px; margin: auto; }
-        .main-grid { display: grid; grid-template-columns: 320px 1fr 320px; gap: 20px; }
+        /* LAYOUT GRID */
+        #main-content { padding: 110px 20px 50px; max-width: 1600px; margin: auto; }
+        .main-grid { display: grid; grid-template-columns: 320px 1fr 320px; gap: 25px; }
 
-        .panel { background: var(--glass); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 20px; margin-bottom: 20px; transition: 0.3s; }
-        .panel:hover { border-color: var(--primary); }
-        h2 { font-size: 0.9rem; color: var(--primary); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
+        .panel { 
+            background: var(--glass); backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); border-radius: 25px; 
+            padding: 25px; margin-bottom: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+            animation: fadeIn 0.8s ease-out forwards;
+        }
 
-        /* COMPONENTES ESPECÍFICOS */
-        .btn { background: var(--primary); border: none; padding: 12px; width: 100%; font-weight: 900; cursor: pointer; border-radius: 8px; color: black; transition: 0.3s; text-transform: uppercase; }
-        .btn:hover { transform: scale(1.02); box-shadow: 0 0 20px var(--primary); }
-        input, textarea { width: 100%; padding: 12px; background: #111; border: 1px solid #333; color: white; border-radius: 8px; margin-bottom: 10px; outline: none; }
+        h2 { font-size: 0.85rem; color: var(--primary); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; border-left: 3px solid var(--primary); padding-left: 10px; }
 
-        /* TENDÊNCIAS (ITEM WIKI) */
-        .trend-item { background: rgba(255,255,255,0.03); padding: 10px; border-radius: 10px; display: flex; align-items: center; gap: 10px; margin-bottom: 10px; border: 1px solid transparent; }
-        .trend-img { width: 50px; height: 50px; background: #222; border-radius: 5px; }
+        /* COMPONENTES INTERATIVOS */
+        input, textarea { width: 100%; padding: 14px; background: rgba(0,0,0,0.5); border: 1px solid #333; color: white; border-radius: 12px; margin-bottom: 12px; outline: none; transition: 0.3s; }
+        input:focus { border-color: var(--primary); box-shadow: 0 0 10px var(--primary); }
 
-        /* GAME CANVAS */
-        #game-canvas { background: #000; border: 1px solid var(--primary); display: block; margin: 0 auto; border-radius: 10px; }
+        .btn { background: var(--primary); border: none; padding: 15px; width: 100%; font-weight: 900; cursor: pointer; border-radius: 12px; color: black; transition: 0.4s; text-transform: uppercase; }
+        .btn:hover { transform: translateY(-4px); box-shadow: 0 8px 25px var(--primary); filter: brightness(1.2); }
 
-        /* STATUS TAGS */
-        .tag { font-size: 0.6rem; padding: 2px 6px; border-radius: 4px; font-weight: 900; }
-        .tag-dono { background: var(--admin-gold); color: #000; }
+        /* MURAL COM IMAGENS */
+        .post-card { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 15px; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.05); }
+        .post-img { width: 100%; border-radius: 10px; margin-top: 10px; border: 1px solid var(--primary); }
 
-        @media (max-width: 1200px) { .main-grid { grid-template-columns: 1fr; } }
+        /* RANKING E TAGS */
+        .tag { font-size: 0.6rem; padding: 3px 8px; border-radius: 4px; font-weight: 900; }
+        .tag-dono { background: var(--admin-gold); color: #000; box-shadow: 0 0 10px var(--admin-gold); }
+        .tag-lenda { background: var(--primary); color: #000; }
+
+        /* CHAT */
+        #chat-box { height: 350px; overflow-y: auto; padding-right: 5px; }
+        .chat-msg { margin-bottom: 12px; padding: 10px; background: rgba(255,255,255,0.03); border-radius: 10px; border-bottom: 1px solid var(--glass-border); }
+
+        @media (max-width: 1150px) { .main-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <a href="#" class="nav-logo">RFL•★•REAL <span class="tag tag-dono">DONO</span></a>
+        <a href="#" class="nav-logo">RFL•★•REAL</a>
         <div class="nav-links">
             <a href="#mural">Mural</a>
             <a href="#utilitarios">Utilitários</a>
             <a href="#diversao">Diversão</a>
+            <a href="javascript:void(0)" onclick="abrirSobre()">Sobre a Marca</a>
         </div>
     </nav>
 
@@ -70,63 +92,58 @@
             
             <aside id="utilitarios">
                 <div class="panel">
-                    <h2>✒️ Estilo de Nome</h2>
-                    <input type="text" id="name-input" placeholder="Seu nome..." oninput="gerarNomes()">
-                    <div id="results-area">
-                        <p style="font-size:0.7rem; opacity:0.5; text-align:center;">Resultados aparecerão aqui</p>
-                    </div>
+                    <h2>✒️ Gerador de Nomes VIP</h2>
+                    <input type="text" id="name-in" placeholder="Seu nome..." oninput="gerarNomes()">
+                    <div id="res-names"></div>
+                    <p style="font-size:0.6rem; text-align:center; opacity:0.5; margin-top:10px;">Clique no nome para copiar!</p>
                 </div>
 
                 <div class="panel">
                     <h2>💎 Calculadora de Metas</h2>
-                    <input type="number" id="preco-item" placeholder="Preço (Avacoins)">
-                    <input type="number" id="ganho-diario" placeholder="Ganho p/ Dia">
-                    <button class="btn" onclick="calcularMeta()">Calcular</button>
-                    <p id="resultado-meta" style="margin-top:10px; text-align:center; color:var(--admin-gold); font-weight:bold;"></p>
+                    <input type="number" id="p" placeholder="Preço do Item">
+                    <input type="number" id="g" placeholder="Meta de Ganho Diário">
+                    <button class="btn" onclick="calc()">Calcular Meta</button>
+                    <p id="res-calc" style="margin-top:15px; text-align:center; color:var(--admin-gold); font-weight:900;"></p>
                 </div>
 
                 <div class="panel">
-                    <h2>🔥 Tendências (Wiki)</h2>
-                    <div class="trend-item"><div class="trend-img"></div> <div><p style="font-size:0.8rem">Asas de Ouro</p><small>Raridade: Épico</small></div></div>
-                    <div class="trend-item"><div class="trend-img"></div> <div><p style="font-size:0.8rem">Animação Zumbi</p><small>Raridade: Limitado</small></div></div>
+                    <h2>🏆 Top Ranking</h2>
+                    <div style="margin-bottom:10px;"><span class="tag tag-dono">DONO</span> <b>RFL•★•REAL</b></div>
+                    <div style="margin-bottom:10px;"><span class="tag tag-lenda">LENDA</span> Membro_Ativo</div>
+                    <div><span class="tag" style="background:#fff; color:#000;">NOVO</span> Visitante_Fiel</div>
                 </div>
             </aside>
 
             <section id="mural">
                 <div class="panel">
                     <h2>📸 Mural da Galeria</h2>
-                    <textarea id="post-input" rows="3" placeholder="Link da imagem ou mensagem..."></textarea>
-                    <button class="btn" onclick="alert('Firebase pronto para conexão!')">Publicar Agora</button>
-                    <div id="feed-mural" style="margin-top: 20px;">
+                    <textarea id="post-text" rows="3" placeholder="Escreva aqui..."></textarea>
+                    <input type="text" id="post-url" placeholder="Link da Imagem (opcional)">
+                    <button class="btn" onclick="publicar()">Publicar no Topo</button>
+                    
+                    <div id="feed" style="margin-top: 30px;">
+                        <div class="post-card">
+                            <span class="tag tag-dono">DONO</span> <b>RFL:</b> Bem-vindos ao novo portal!
+                            <img src="https://via.placeholder.com/600x300/00d4ff/000000?text=Exemplo+de+Look+Avakin" class="post-img">
                         </div>
-                </div>
-
-                <div class="panel">
-                    <h2>🗳️ Enquete Ativa</h2>
-                    <p style="font-size:0.8rem; margin-bottom:10px;">Melhor local para fotos?</p>
-                    <button class="btn" style="background:rgba(255,255,255,0.1); color:white; margin-bottom:5px;" onclick="alert('Voto registrado!')">The Venue</button>
-                    <button class="btn" style="background:rgba(255,255,255,0.1); color:white;" onclick="alert('Voto registrado!')">Starstyle</button>
+                    </div>
                 </div>
             </section>
 
             <aside id="diversao">
                 <div class="panel">
-                    <h2>🎮 Arcade TOPO (Snake)</h2>
-                    <canvas id="game-canvas" width="240" height="240"></canvas>
-                </div>
-
-                <div class="panel">
-                    <h2>🔮 Oráculo do Destino</h2>
-                    <p id="oracle-msg" style="font-size:0.8rem; text-align:center; min-height:40px;">Consulte o destino...</p>
-                    <button class="btn" onclick="revelarSorte()" style="background:var(--admin-gold)">Consultar</button>
+                    <h2>🔮 O Oráculo Diário</h2>
+                    <p id="oracle-txt" style="font-size:0.85rem; text-align:center; min-height:50px; color:var(--admin-gold);">Consulte o seu destino hoje...</p>
+                    <button class="btn" onclick="consultarOraculo()" style="background:var(--admin-gold)">Revelar Sorte</button>
                 </div>
 
                 <div class="panel">
                     <h2>💬 Chat Global</h2>
-                    <div id="chat-box" style="height:200px; overflow-y:auto; margin-bottom:10px; font-size:0.8rem;">
-                        <p><b>System:</b> Bem-vindo ao TOPO!</p>
+                    <div id="chat-box">
+                        <div class="chat-msg"><b>System:</b> Bem-vindo ao TOPO!</div>
                     </div>
-                    <input type="text" placeholder="Sua mensagem...">
+                    <input type="text" id="chat-in" placeholder="Sua mensagem..." onkeypress="if(event.key==='Enter') enviar()">
+                    <button class="btn" onclick="enviar()">Enviar</button>
                 </div>
             </aside>
 
@@ -134,41 +151,61 @@
     </main>
 
     <script>
-        // --- GERADOR DE NOMES ---
+        // GERADOR DE NOMES
         function gerarNomes() {
-            const val = document.getElementById('name-input').value;
-            const area = document.getElementById('results-area');
-            if(val.length > 0) {
-                area.innerHTML = `
-                    <div style="background:#000; padding:10px; border-radius:5px; margin-top:5px; cursor:pointer;" onclick="navigator.clipboard.writeText('${val} •★•'); alert('Copiado!')">${val} •★•</div>
-                    <div style="background:#000; padding:10px; border-radius:5px; margin-top:5px; cursor:pointer;" onclick="navigator.clipboard.writeText('꧁${val}꧂'); alert('Copiado!')">꧁${val}꧂</div>
+            const val = document.getElementById('name-in').value;
+            const res = document.getElementById('res-names');
+            if(val) {
+                res.innerHTML = `
+                    <div style="background:rgba(0,0,0,0.5); padding:10px; border-radius:8px; margin-top:8px; cursor:pointer; text-align:center; border:1px solid var(--primary);" onclick="copy(this)">${val} •★•</div>
+                    <div style="background:rgba(0,0,0,0.5); padding:10px; border-radius:8px; margin-top:8px; cursor:pointer; text-align:center; border:1px solid var(--primary);" onclick="copy(this)">꧁${val}꧂</div>
                 `;
+            } else { res.innerHTML = ""; }
+        }
+
+        function copy(el) {
+            navigator.clipboard.writeText(el.innerText);
+            alert("Nome estilizado copiado!");
+        }
+
+        // CALCULADORA
+        function calc() {
+            const p = document.getElementById('p').value;
+            const g = document.getElementById('g').value;
+            if(p && g) document.getElementById('res-calc').innerText = `CONQUISTADO EM ${Math.ceil(p/g)} DIAS! 🚀`;
+        }
+
+        // ORÁCULO
+        const sortes = ["Sorte grande no Egito! 💎", "Receberás um presente raro! 🎁", "Teu look será o centro das atenções! ✨", "Hoje é dia de fazer novos amigos! 🤝"];
+        function consultarOraculo() {
+            document.getElementById('oracle-txt').innerText = sortes[Math.floor(Math.random()*sortes.length)];
+        }
+
+        // CHAT
+        function enviar() {
+            const input = document.getElementById('chat-in');
+            const box = document.getElementById('chat-box');
+            if(input.value) {
+                box.innerHTML += `<div class="chat-msg"><b>Visitante:</b> ${input.value}</div>`;
+                input.value = "";
+                box.scrollTop = box.scrollHeight;
             }
         }
 
-        // --- CALCULADORA ---
-        function calcularMeta() {
-            const p = document.getElementById('preco-item').value;
-            const g = document.getElementById('ganho-diario').value;
-            if(p && g) document.getElementById('resultado-meta').innerText = `Faltam ${Math.ceil(p/g)} dias!`;
+        // MURAL
+        function publicar() {
+            const txt = document.getElementById('post-text').value;
+            const url = document.getElementById('post-url').value;
+            const feed = document.getElementById('feed');
+            if(txt || url) {
+                let html = `<div class="post-card"><b>Visitante:</b> ${txt}`;
+                if(url) html += `<img src="${url}" class="post-img">`;
+                html += `</div>`;
+                feed.innerHTML = html + feed.innerHTML;
+                document.getElementById('post-text').value = "";
+                document.getElementById('post-url').value = "";
+            }
         }
-
-        // --- ORÁCULO ---
-        const sortes = ["Sorte grande no Egito!", "Novo presente chegando!", "Seu estilo vai brilhar hoje!", "Cuidado com trolls no café!"];
-        function revelarSorte() {
-            document.getElementById('oracle-msg').innerText = sortes[Math.floor(Math.random()*sortes.length)];
-        }
-
-        // --- GAME (SNAKE SIMPLIFICADO) ---
-        const canvas = document.getElementById("game-canvas");
-        const ctx = canvas.getContext("2d");
-        let snake = [{x: 10, y: 10}];
-        setInterval(() => {
-            ctx.fillStyle = "black"; ctx.fillRect(0,0,240,240);
-            ctx.fillStyle = "#00d4ff"; 
-            snake.forEach(s => ctx.fillRect(s.x*12, s.y*12, 11, 11));
-        }, 150);
-
     </script>
 </body>
 </html>
