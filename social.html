@@ -4,146 +4,180 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Social | RFL•★•REAL</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
-        font-family: 'Inter', sans-serif;
-        min-height: 100vh;
-        background: #050505;
-        color: white;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        overflow-x: hidden;
-        padding-top: 120px; 
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            background: #050505;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            padding-top: 120px; 
+        }
 
-    /* --- ESTRUTURA E CABEÇALHO --- */
-    #header-placeholder { position: fixed; top: 0; left: 0; width: 100%; z-index: 10000; }
-    #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        /* --- ESTRUTURA E CABEÇALHO --- */
+        #header-placeholder { position: fixed; top: 0; left: 0; width: 100%; z-index: 10000; }
+        #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
 
-    .social-container {
-        position: relative;
-        z-index: 1;
-        max-width: 1100px;
-        width: 100%;
-        padding: 40px 20px;
-        text-align: center;
-        /* Adicionando margem para o menu lateral que faremos */
-        margin-left: 200px; 
-    }
+        /* Estilo do Menu Lateral Fixado */
+        .sidebar-lateral {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.02);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            padding: 120px 20px;
+            z-index: 500;
+            display: flex;
+            flex-direction: column;
+        }
 
-    /* --- BOTÃO DE POSTAGEM --- */
-    .btn-post {
-        position: fixed;
-        bottom: 40px;
-        right: 40px;
-        background: #00ff88;
-        color: #000;
-        border: none;
-        padding: 15px 25px;
-        border-radius: 50px;
-        font-weight: 900;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
-        z-index: 1001;
-        transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        text-transform: uppercase;
-        font-size: 0.8rem;
-    }
+        .side-logo {
+            font-weight: 900;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            color: rgba(0, 255, 136, 0.5);
+            margin-bottom: 50px;
+            text-align: center;
+        }
 
-    .btn-post:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 0 30px #00ff88; }
+        .side-nav { display: flex; flex-direction: column; gap: 10px; }
 
-    /* --- LINKS PRINCIPAIS (HUB) --- */
-    .main-title {
-        font-size: 3rem;
-        font-weight: 900;
-        margin-bottom: 10px;
-        background: linear-gradient(180deg, #fff 0%, #666 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
+        .side-link {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.5);
+            padding: 15px 20px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: 0.3s;
+        }
 
-    .sub-title {
-        font-size: 0.9rem;
-        color: rgba(255, 255, 255, 0.5);
-        letter-spacing: 5px;
-        text-transform: uppercase;
-        margin-bottom: 50px;
-    }
+        .side-link:hover, .side-link.active {
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+        }
 
-    .hub-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-        margin-bottom: 80px;
-    }
+        .social-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            width: 100%;
+            padding: 40px 20px;
+            text-align: center;
+            margin-left: 250px; /* Compensa a largura do menu lateral */
+        }
 
-    .hub-item {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 15px;
-        padding: 30px;
-        transition: 0.4s;
-        text-decoration: none;
-        color: white;
-        backdrop-filter: blur(15px);
-    }
+        /* --- BOTÃO DE POSTAGEM --- */
+        .btn-post {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: #00ff88;
+            color: #000;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: 900;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+            z-index: 1001;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
 
-    .hub-item:hover { transform: translateY(-5px); border-color: rgba(0, 255, 136, 0.3); background: rgba(255, 255, 255, 0.08); }
+        .btn-post:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 0 30px #00ff88; }
 
-    /* --- FEED DE FOTOS (NOVO) --- */
-    .feed-header { text-align: left; margin-bottom: 30px; }
-    .feed-title { color: #00ff88; font-size: 1.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
-    .feed-line { width: 60px; height: 4px; background: #00ff88; margin-top: 10px; box-shadow: 0 0 10px #00ff88; }
+        /* --- CONTEÚDO --- */
+        .main-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            background: linear-gradient(180deg, #fff 0%, #666 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    .photo-feed {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-        gap: 20px;
-    }
+        .sub-title {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+        }
 
-    .post-card {
-        background: rgba(255, 255, 255, 0.02);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        border-radius: 20px;
-        overflow: hidden;
-        transition: 0.3s;
-        text-align: left;
-    }
+        .hub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 80px;
+        }
 
-    .post-card:hover { border-color: #00ff88; transform: translateY(-5px); }
+        .hub-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 30px;
+            transition: 0.4s;
+            text-decoration: none;
+            color: white;
+            backdrop-filter: blur(15px);
+        }
 
-    .post-preview {
-        background: #111;
-        height: 180px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        color: rgba(255,255,255,0.2);
-    }
+        .feed-header { text-align: left; margin-bottom: 30px; }
+        .feed-title { color: #00ff88; font-size: 1.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; border-left: 4px solid #00ff88; padding-left: 15px; }
 
-    .post-details { padding: 20px; }
-    .user-info { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
-    .user-status-dot { width: 8px; height: 8px; background: #00ff88; border-radius: 50%; box-shadow: 0 0 5px #00ff88; }
-    .post-caption { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+        .photo-feed {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
 
-    @media (max-width: 900px) {
-        .social-container { margin-left: 0; }
-        .main-title { font-size: 2.2rem; }
-        .btn-post p { display: none; }
-        .btn-post { padding: 15px; border-radius: 50%; }
-    }
-</style>
+        .post-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: 0.3s;
+            text-align: left;
+        }
+
+        .post-preview { background: #111; height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: rgba(255,255,255,0.2); }
+        .post-details { padding: 20px; }
+        .user-info { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+        .user-status-dot { width: 8px; height: 8px; background: #00ff88; border-radius: 50%; box-shadow: 0 0 5px #00ff88; }
+        .post-caption { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+
+        @media (max-width: 900px) {
+            .sidebar-lateral { display: none; }
+            .social-container { margin-left: 0; }
+        }
+    </style>
 </head>
 <body>
+
+    <aside class="sidebar-lateral">
+        <div class="side-logo">RFL•★•SOCIAL</div>
+        <nav class="side-nav">
+            <a href="#" class="side-link active">🏠 Feed</a>
+            <a href="#" class="side-link">👥 Comunidade</a>
+            <a href="#" class="side-link">💎 VIP</a>
+            <a href="#" class="side-link">👤 Perfil</a>
+        </nav>
+    </aside>
 
     <button class="btn-post" onclick="abrirModal()">
         <span style="font-size: 1.5rem;">+</span>
@@ -153,7 +187,7 @@
     <div id="header-placeholder"></div>
     <div id="particles-js"></div>
 
-  <div class="social-container">
+    <div class="social-container">
         <h1 class="main-title">O Coração do Ecossistema</h1>
         <p class="sub-title">Avakin Life Social House</p>
 
@@ -163,13 +197,11 @@
                 <h4>Comunidade</h4>
                 <p>Conecte-se com membros da Social House e participe da elite.</p>
             </a>
-
             <a href="https://instagram.com/raphael_real_ofc" target="_blank" class="hub-item">
                 <span>📸</span>
                 <h4>Instagram Oficial</h4>
                 <p>Acompanhe o dia a dia e as atualizações da marca em tempo real.</p>
             </a>
-
             <a href="#" class="hub-item">
                 <span>💎</span>
                 <h4>Exclusividades</h4>
@@ -179,39 +211,49 @@
 
         <div class="feed-header">
             <h2 class="feed-title">Recentes na Social House</h2>
-            <div class="feed-line"></div>
         </div>
 
         <div class="photo-feed">
             <div class="post-card">
-                <div class="post-preview">
-                    <span class="icon-cam">📸</span>
-                    <p>Preview da Foto</p>
-                </div>
+                <div class="post-preview">📸 <p>Preview da Foto</p> </div>
                 <div class="post-details">
-                    <div class="user-info">
-                        <div class="user-status-dot"></div>
-                        <strong>@Membro_Elite</strong>
-                    </div>
+                    <div class="user-info"><div class="user-status-dot"></div><strong>@Membro_Elite</strong></div>
                     <p class="post-caption">Momento exclusivo na Social House.</p>
                 </div>
             </div>
-
             <div class="post-card">
-                <div class="post-preview">
-                    <span class="icon-cam">📸</span>
-                    <p>Preview da Foto</p>
-                </div>
+                <div class="post-preview">📸 <p>Preview da Foto</p> </div>
                 <div class="post-details">
-                    <div class="user-info">
-                        <div class="user-status-dot"></div>
-                        <strong>@RFL•★•REAL</strong>
-                    </div>
+                    <div class="user-info"><div class="user-status-dot"></div><strong>@RFL•★•REAL</strong></div>
                     <p class="post-caption">Nova atualização do Hub disponível.</p>
                 </div>
             </div>
-            
-            </div>
+        </div>
+    </div>
 
-    </div> ```
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        // Carrega o cabeçalho externo
+        fetch('cabecalho/head.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            });
 
+        // Partículas de fundo
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 40, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#ffffff" },
+                "opacity": { "value": 0.1 },
+                "size": { "value": 1 },
+                "move": { "enable": true, "speed": 0.5 }
+            }
+        });
+
+        function abrirModal() {
+            alert("RFL•★•SOCIAL: Sistema de upload em breve!");
+        }
+    </script>
+</body>
+</html>
