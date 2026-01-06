@@ -153,13 +153,18 @@
             }
         });
 
-        // IMPORTANTE: Busca o arquivo na sua pasta nova
-        fetch('cabessario/Cabeça.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header-placeholder').innerHTML = data;
-            })
-            .catch(error => console.log('Erro ao carregar cabeçalho:', error));
+       fetch('cabecalho/head.html') // Caminho limpo, sem acentos
+    .then(response => {
+        if (!response.ok) throw new Error('Erro na conexão: ' + response.status);
+        return response.text();
+    })
+    .then(data => {
+        document.getElementById('header-placeholder').innerHTML = data;
+        console.log('O cabeçalho do RFL foi carregado!');
+    })
+    .catch(error => {
+        console.error('Erro ao carregar cabeçalho:', error);
+    });
     </script>
 
 </body>
