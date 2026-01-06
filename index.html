@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RFL•★•REAL | Official Enterprise</title>
+    <title>RFL•★•REAL | Avakin Life Social House</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
 
@@ -27,7 +27,7 @@
             z-index: 0;
         }
 
-        /* Navegação Superior Empresarial */
+        /* Navegação Superior */
         .top-nav {
             position: absolute;
             top: 30px;
@@ -41,17 +41,16 @@
             text-decoration: none;
             font-size: 0.7rem;
             letter-spacing: 3px;
-            font-weight: 400;
             transition: 0.3s;
         }
 
         .top-nav a:hover { color: #fff; }
 
-        /* Cartão de Vidro Premium */
+        /* Cartão de Vidro */
         .glass-card {
             position: relative;
             z-index: 1;
-            padding: 5rem;
+            padding: 4rem 5rem;
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(30px);
             -webkit-backdrop-filter: blur(30px);
@@ -59,26 +58,28 @@
             border-radius: 40px;
             text-align: center;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
-            overflow: hidden; /* Para o brilho não sair das bordas */
+            overflow: hidden;
         }
 
-        /* Efeito Shimmer (Brilho de Diamante) */
-        .glass-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -150%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.08), transparent);
-            transform: skewX(-25deg);
-            animation: shimmer 4s infinite;
+        /* Nova Frase Pulsante Superior */
+        .top-phrase {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 0.5rem;
+            display: block;
+            animation: pulse-text 2s infinite ease-in-out;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
-        @keyframes shimmer { 100% { left: 150%; } }
+        @keyframes pulse-text {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
 
-        /* Branding RFL•★•REAL */
-        .brand-icon { font-size: 1.5rem; color: #fff; margin-bottom: 1rem; opacity: 0.7; }
+        .brand-icon { font-size: 1.5rem; color: #fff; margin-bottom: 0.5rem; opacity: 0.8; }
 
         h1 {
             font-size: 4.5rem;
@@ -96,19 +97,17 @@
             color: #fff;
             text-transform: uppercase;
             letter-spacing: 14px;
-            margin-bottom: 1rem;
-            opacity: 0.9;
-        }
-
-        .slogan {
-            font-size: 0.65rem;
-            color: rgba(255, 255, 255, 0.4);
-            letter-spacing: 3px;
-            text-transform: uppercase;
             margin-bottom: 3.5rem;
+            opacity: 0.9;
+            animation: pulse-glow 3s infinite ease-in-out;
         }
 
-        /* Botão Corporate */
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 1; filter: brightness(1); }
+            50% { opacity: 0.7; filter: brightness(1.2); }
+        }
+
+        /* Botão */
         .btn-enter {
             display: inline-block;
             padding: 1.2rem 4rem;
@@ -120,6 +119,7 @@
             font-size: 0.9rem;
             letter-spacing: 2px;
             transition: 0.4s ease;
+            text-transform: uppercase;
         }
 
         .btn-enter:hover {
@@ -129,7 +129,7 @@
             border: 1px solid #fff;
         }
 
-        /* Rodapé Social */
+        /* Rodapé */
         .footer {
             position: absolute;
             bottom: 30px;
@@ -147,17 +147,6 @@
 
         .social-link:hover { color: #fff; }
 
-        .copyright {
-            margin-top: 15px;
-            font-size: 0.55rem;
-            color: rgba(255, 255, 255, 0.2);
-            letter-spacing: 1px;
-        }
-
-        /* Animação de Entrada */
-        .glass-card { animation: fadeIn 1.5s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
     </style>
 </head>
 <body>
@@ -171,31 +160,29 @@
 </nav>
 
 <div class="glass-card">
+    <span class="top-phrase">Avakin Life Social House</span>
     <div class="brand-icon">✦</div>
     <h1>RFL•★•REAL</h1>
     <p class="tagline">BEM-VINDO AO TOPO</p>
-    <p class="slogan">Excelência Digital e Gestão de Alta Performance</p>
     
-    <a href="#" class="btn-enter">ACESSAR ECOSSISTEMA</a>
+    <a href="#" class="btn-enter">ENTRAR</a>
 </div>
 
 <div class="footer">
     <a href="https://instagram.com/raphael_real_ofc" class="social-link" target="_blank">INSTAGRAM @RAPHAEL_REAL_OFC</a>
-    <p class="copyright">© 2026 RFL•★•REAL • TODOS OS DIREITOS RESERVADOS</p>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
     particlesJS('particles-js', {
         "particles": {
-            "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+            "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
             "color": { "value": "#ffffff" },
             "opacity": { "value": 0.2 },
             "size": { "value": 2, "random": true },
             "line_linked": { "enable": false },
-            "move": { "enable": true, "speed": 0.8, "direction": "none", "random": true, "out_mode": "out" }
-        },
-        "interactivity": { "events": { "onhover": { "enable": true, "mode": "bubble" } }, "modes": { "bubble": { "size": 4, "opacity": 1 } } }
+            "move": { "enable": true, "speed": 1 }
+        }
     });
 </script>
 
