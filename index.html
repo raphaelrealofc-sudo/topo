@@ -27,25 +27,6 @@
             z-index: 0;
         }
 
-        /* Navegação Superior */
-        .top-nav {
-            position: absolute;
-            top: 30px;
-            display: flex;
-            gap: 40px;
-            z-index: 10;
-        }
-
-        .top-nav a {
-            color: rgba(255, 255, 255, 0.4);
-            text-decoration: none;
-            font-size: 0.7rem;
-            letter-spacing: 3px;
-            transition: 0.3s;
-        }
-
-        .top-nav a:hover { color: #fff; }
-
         /* Cartão de Vidro */
         .glass-card {
             position: relative;
@@ -61,7 +42,6 @@
             overflow: hidden;
         }
 
-        /* Nova Frase Pulsante Superior */
         .top-phrase {
             font-size: 0.8rem;
             font-weight: 700;
@@ -99,15 +79,8 @@
             letter-spacing: 14px;
             margin-bottom: 3.5rem;
             opacity: 0.9;
-            animation: pulse-glow 3s infinite ease-in-out;
         }
 
-        @keyframes pulse-glow {
-            0%, 100% { opacity: 1; filter: brightness(1); }
-            50% { opacity: 0.7; filter: brightness(1.2); }
-        }
-
-        /* Botão */
         .btn-enter {
             display: inline-block;
             padding: 1.2rem 4rem;
@@ -129,7 +102,6 @@
             border: 1px solid #fff;
         }
 
-        /* Rodapé */
         .footer {
             position: absolute;
             bottom: 30px;
@@ -146,45 +118,49 @@
         }
 
         .social-link:hover { color: #fff; }
-
     </style>
 </head>
 <body>
-
-<div id="particles-js"></div>
-
-<nav class="top-nav">
-    <a href="#">SOLUÇÕES</a>
-    <a href="#">PORTFÓLIO</a>
-    <a href="#">CONTATO</a>
-</nav>
-
-<div class="glass-card">
-    <span class="top-phrase">Avakin Life Social House</span>
-    <div class="brand-icon">✦</div>
-    <h1>RFL•★•REAL</h1>
-    <p class="tagline">BEM-VINDO AO TOPO</p>
     
-    <a href="social.html" class="btn-enter">ENTRAR</a>
-</div>
+    <div id="header-placeholder"></div>
 
-<div class="footer">
-    <a href="https://instagram.com/raphael_real_ofc" class="social-link" target="_blank">INSTAGRAM @RAPHAEL_REAL_OFC</a>
-</div>
+    <div id="particles-js"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-<script>
-    particlesJS('particles-js', {
-        "particles": {
-            "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
-            "color": { "value": "#ffffff" },
-            "opacity": { "value": 0.2 },
-            "size": { "value": 2, "random": true },
-            "line_linked": { "enable": false },
-            "move": { "enable": true, "speed": 1 }
-        }
-    });
-</script>
+    <div class="glass-card">
+        <span class="top-phrase">Avakin Life Social House</span>
+        <div class="brand-icon">✦</div>
+        <h1>RFL•★•REAL</h1>
+        <p class="tagline">BEM-VINDO AO TOPO</p>
+        
+        <a href="social.html" class="btn-enter">ENTRAR</a>
+    </div>
+
+    <div class="footer">
+        <a href="https://instagram.com/raphael_real_ofc" class="social-link" target="_blank">INSTAGRAM @RAPHAEL_REAL_OFC</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        // Inicia Partículas
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#ffffff" },
+                "opacity": { "value": 0.2 },
+                "size": { "value": 2, "random": true },
+                "line_linked": { "enable": false },
+                "move": { "enable": true, "speed": 1 }
+            }
+        });
+
+        // IMPORTANTE: Busca o arquivo na sua pasta nova
+        fetch('cabessario/Cabeça.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(error => console.log('Erro ao carregar cabeçalho:', error));
+    </script>
 
 </body>
 </html>
