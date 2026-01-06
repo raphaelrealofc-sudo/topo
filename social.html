@@ -4,124 +4,144 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Social | RFL•★•REAL</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            background: #050505;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow-x: hidden;
-            padding-top: 120px; 
-        }
+    body {
+        font-family: 'Inter', sans-serif;
+        min-height: 100vh;
+        background: #050505;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-x: hidden;
+        padding-top: 120px; 
+    }
 
-        #header-placeholder {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 10000;
-        }
+    /* --- ESTRUTURA E CABEÇALHO --- */
+    #header-placeholder { position: fixed; top: 0; left: 0; width: 100%; z-index: 10000; }
+    #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
 
-        #particles-js {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
+    .social-container {
+        position: relative;
+        z-index: 1;
+        max-width: 1100px;
+        width: 100%;
+        padding: 40px 20px;
+        text-align: center;
+        /* Adicionando margem para o menu lateral que faremos */
+        margin-left: 200px; 
+    }
 
-        /* Estilo do Botão de Postagem */
-        .btn-post {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            background: #00ff88;
-            color: #000;
-            border: none;
-            padding: 15px 25px;
-            border-radius: 50px;
-            font-weight: 900;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
-            z-index: 1001; /* Acima de tudo */
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-transform: uppercase;
-            font-size: 0.8rem;
-        }
+    /* --- BOTÃO DE POSTAGEM --- */
+    .btn-post {
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+        background: #00ff88;
+        color: #000;
+        border: none;
+        padding: 15px 25px;
+        border-radius: 50px;
+        font-weight: 900;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+        z-index: 1001;
+        transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        text-transform: uppercase;
+        font-size: 0.8rem;
+    }
 
-        .btn-post:hover { 
-            transform: scale(1.1) translateY(-5px); 
-            box-shadow: 0 0 30px #00ff88; 
-        }
+    .btn-post:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 0 30px #00ff88; }
 
-        /* Conteúdo Social */
-        .social-container {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-            width: 100%;
-            padding: 40px 20px;
-            text-align: center;
-        }
+    /* --- LINKS PRINCIPAIS (HUB) --- */
+    .main-title {
+        font-size: 3rem;
+        font-weight: 900;
+        margin-bottom: 10px;
+        background: linear-gradient(180deg, #fff 0%, #666 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 
-        .main-title {
-            font-size: 3rem;
-            font-weight: 900;
-            margin-bottom: 10px;
-            letter-spacing: -1px;
-            background: linear-gradient(180deg, #fff 0%, #666 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    .sub-title {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.5);
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        margin-bottom: 50px;
+    }
 
-        .sub-title {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.5);
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            margin-bottom: 50px;
-        }
+    .hub-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-bottom: 80px;
+    }
 
-        .hub-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
+    .hub-item {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 15px;
+        padding: 30px;
+        transition: 0.4s;
+        text-decoration: none;
+        color: white;
+        backdrop-filter: blur(15px);
+    }
 
-        .hub-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 15px;
-            padding: 30px;
-            transition: 0.4s;
-            text-decoration: none;
-            color: white;
-            backdrop-filter: blur(15px);
-        }
+    .hub-item:hover { transform: translateY(-5px); border-color: rgba(0, 255, 136, 0.3); background: rgba(255, 255, 255, 0.08); }
 
-        .hub-item:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(0, 255, 136, 0.3);
-        }
+    /* --- FEED DE FOTOS (NOVO) --- */
+    .feed-header { text-align: left; margin-bottom: 30px; }
+    .feed-title { color: #00ff88; font-size: 1.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
+    .feed-line { width: 60px; height: 4px; background: #00ff88; margin-top: 10px; box-shadow: 0 0 10px #00ff88; }
 
-        @media (max-width: 600px) {
-            .main-title { font-size: 2.2rem; }
-            .btn-post p { display: none; } /* Esconde o texto no mobile, deixa só o + */
-            .btn-post { padding: 15px; border-radius: 50%; }
-        }
-    </style>
+    .photo-feed {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 20px;
+    }
+
+    .post-card {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        overflow: hidden;
+        transition: 0.3s;
+        text-align: left;
+    }
+
+    .post-card:hover { border-color: #00ff88; transform: translateY(-5px); }
+
+    .post-preview {
+        background: #111;
+        height: 180px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255,255,255,0.2);
+    }
+
+    .post-details { padding: 20px; }
+    .user-info { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .user-status-dot { width: 8px; height: 8px; background: #00ff88; border-radius: 50%; box-shadow: 0 0 5px #00ff88; }
+    .post-caption { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+
+    @media (max-width: 900px) {
+        .social-container { margin-left: 0; }
+        .main-title { font-size: 2.2rem; }
+        .btn-post p { display: none; }
+        .btn-post { padding: 15px; border-radius: 50%; }
+    }
+</style>
 </head>
 <body>
 
@@ -133,7 +153,7 @@
     <div id="header-placeholder"></div>
     <div id="particles-js"></div>
 
-    <div class="social-container">
+  <div class="social-container">
         <h1 class="main-title">O Coração do Ecossistema</h1>
         <p class="sub-title">Avakin Life Social House</p>
 
@@ -156,31 +176,42 @@
                 <p>Acesso a conteúdos e eventos restritos ao topo da pirâmide.</p>
             </a>
         </div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <script>
-        // Configuração das Partículas
-        particlesJS('particles-js', {
-            "particles": {
-                "number": { "value": 40, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#ffffff" },
-                "opacity": { "value": 0.1 },
-                "size": { "value": 1 },
-                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.05, "width": 1 },
-                "move": { "enable": true, "speed": 0.5 }
-            }
-        });
+        <div class="feed-header">
+            <h2 class="feed-title">Recentes na Social House</h2>
+            <div class="feed-line"></div>
+        </div>
 
-        // Integração do Cabeçalho
-        fetch('cabecalho/head.html')
-            .then(response => response.text())
-            .then(data => document.getElementById('header-placeholder').innerHTML = data);
+        <div class="photo-feed">
+            <div class="post-card">
+                <div class="post-preview">
+                    <span class="icon-cam">📸</span>
+                    <p>Preview da Foto</p>
+                </div>
+                <div class="post-details">
+                    <div class="user-info">
+                        <div class="user-status-dot"></div>
+                        <strong>@Membro_Elite</strong>
+                    </div>
+                    <p class="post-caption">Momento exclusivo na Social House.</p>
+                </div>
+            </div>
 
-        // Função do Botão (Ação)
-        function abrirModal() {
-            alert("RFL•★•SOCIAL: O sistema de upload de fotos está sendo conectado ao banco de dados!");
-        }
-    </script>
-</body>
-</html>
+            <div class="post-card">
+                <div class="post-preview">
+                    <span class="icon-cam">📸</span>
+                    <p>Preview da Foto</p>
+                </div>
+                <div class="post-details">
+                    <div class="user-info">
+                        <div class="user-status-dot"></div>
+                        <strong>@RFL•★•REAL</strong>
+                    </div>
+                    <p class="post-caption">Nova atualização do Hub disponível.</p>
+                </div>
+            </div>
+            
+            </div>
+
+    </div> ```
+
