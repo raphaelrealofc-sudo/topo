@@ -1,1 +1,92 @@
+/* Configuração do Cabeçalho Principal */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 50px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    z-index: 99999; /* Valor alto para garantir visibilidade */
+}
 
+.brand-hub {
+    font-weight: 900;
+    letter-spacing: 3px;
+    font-size: 1.1rem;
+    color: #fff;
+    text-transform: uppercase;
+    animation: pulseName 2s infinite ease-in-out;
+}
+
+.center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.center-phrase {
+    font-size: 0.9rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #ffffff;
+    animation: pulseText 3s infinite ease-in-out;
+}
+
+.pulse-line {
+    width: 100px;
+    height: 2px;
+    background: #00ff88;
+    box-shadow: 0 0 15px #00ff88;
+    animation: pulseLine 2s infinite alternate ease-in-out;
+}
+
+.status-online {
+    color: #00ff88;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 0.65rem;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: #00ff88;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00ff88;
+    animation: blink 1.5s infinite;
+}
+
+/* Animações */
+@keyframes pulseName {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.03); opacity: 0.8; }
+}
+
+@keyframes pulseText {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes pulseLine {
+    0% { width: 40px; opacity: 0.4; }
+    100% { width: 120px; opacity: 1; }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+@media (max-width: 768px) {
+    .main-header { padding: 15px 20px; grid-template-columns: 1fr; gap: 10px; text-align: center; }
+    .status-container { display: none; }
+}
