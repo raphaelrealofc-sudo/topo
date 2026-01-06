@@ -17,91 +17,117 @@
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         body { background: var(--bg-dark); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
-        /* PÁGINA DE ENTRADA */
+        /* BARRA DE NAVEGAÇÃO */
+        .navbar {
+            position: fixed; top: 0; width: 100%; padding: 15px 30px;
+            background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(15px);
+            display: none; justify-content: space-between; align-items: center;
+            z-index: 1000; border-bottom: 2px solid var(--primary);
+        }
+        .nav-logo { font-weight: 900; color: var(--primary); text-decoration: none; font-size: 1.4rem; }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; }
+
+        /* TELA DE ENTRADA */
         #hero {
             height: 100vh; display: flex; flex-direction: column; justify-content: center;
             align-items: center; position: relative; text-align: center;
         }
-
         .parallax-bg {
-            position: absolute; top: 0; left: 0; width: 110%; height: 110%;
+            position: absolute; top: 0; left: 0; width: 115%; height: 115%;
             background: url('https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=80') no-repeat center;
-            background-size: cover; z-index: -2; transform: translate(-5%, -5%); transition: 0.1s;
+            background-size: cover; z-index: -2;
         }
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 20%, #000 90%); z-index: -1; }
 
-        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.9) 100%); z-index: -1; }
-
-        .site-title { font-size: clamp(3rem, 15vw, 7rem); font-weight: 900; letter-spacing: -2px; text-transform: uppercase; }
-        .brand-name { color: var(--primary); letter-spacing: 5px; text-shadow: 0 0 15px var(--primary); font-weight: 700; }
+        .site-title { font-size: clamp(4rem, 15vw, 8rem); font-weight: 900; }
+        .brand-name { color: var(--primary); letter-spacing: 10px; font-weight: 700; }
 
         .enter-btn {
-            margin-top: 30px; padding: 18px 50px; background: transparent; 
+            margin-top: 40px; padding: 20px 60px; background: transparent; 
             border: 2px solid var(--primary); color: var(--primary); cursor: pointer;
-            font-weight: bold; transition: 0.4s; letter-spacing: 2px;
+            font-weight: 900; letter-spacing: 3px; transition: 0.5s;
         }
-        .enter-btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 30px var(--primary); transform: scale(1.05); }
+        .enter-btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 50px var(--primary); }
 
-        /* CONTEÚDO PRINCIPAL */
-        #main-content { display: none; padding: 40px 15px; max-width: 1300px; margin: auto; animation: fadeIn 1s; }
+        /* LAYOUT PRINCIPAL */
+        #main-content { display: none; padding: 120px 20px 50px; max-width: 1400px; margin: auto; }
+        .grid-container { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 20px; }
 
-        .grid-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; }
+        .glass-panel { background: var(--glass); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 20px; }
+        h2 { font-size: 1.1rem; color: var(--primary); margin-bottom: 20px; text-transform: uppercase; }
 
-        /* MURAL */
-        .mural-section { background: var(--glass); padding: 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); }
-        .post-card { background: rgba(20,20,20,0.8); padding: 20px; margin-bottom: 20px; border-radius: 12px; position: relative; border: 1px solid rgba(255,255,255,0.05); }
-        .post-admin { border: 2px solid var(--admin-gold); background: rgba(255, 215, 0, 0.05); box-shadow: 0 0 15px rgba(255, 215, 0, 0.1); }
-        .admin-badge { color: var(--admin-gold); font-size: 0.9rem; font-weight: 900; display: block; margin-bottom: 10px; }
-        .post-img { max-width: 100%; border-radius: 8px; margin-top: 10px; }
-        .delete-btn { position: absolute; top: 15px; right: 15px; cursor: pointer; opacity: 0.3; transition: 0.3s; }
-        .delete-btn:hover { opacity: 1; color: #ff4b4b; }
+        /* MURAL E LIKES */
+        .post-card { background: rgba(0,0,0,0.5); padding: 20px; border-radius: 15px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.05); position: relative; }
+        .post-img { max-width: 100%; border-radius: 10px; margin: 10px 0; display: block; }
+        
+        .like-container { display: flex; align-items: center; gap: 8px; margin-top: 15px; }
+        .like-btn { 
+            background: transparent; border: 1px solid var(--primary); color: var(--primary);
+            padding: 5px 15px; border-radius: 20px; cursor: pointer; font-weight: bold; transition: 0.3s;
+        }
+        .like-btn:hover { background: var(--primary); color: black; }
+        .like-count { font-weight: bold; color: var(--primary); }
 
         /* CHAT */
-        .chat-section { background: var(--glass); padding: 20px; border-radius: 20px; height: 70vh; display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,0.1); }
-        #chat-messages { flex-grow: 1; overflow-y: auto; margin-bottom: 15px; padding-right: 10px; }
-        .chat-msg { margin-bottom: 10px; padding: 10px; border-radius: 10px; background: rgba(255,255,255,0.03); border-left: 3px solid var(--primary); font-size: 0.9rem; }
+        #chat-box { height: 450px; overflow-y: auto; margin-bottom: 10px; padding-right: 5px; }
+        .chat-msg { margin-bottom: 10px; font-size: 0.9rem; padding: 8px; background: rgba(255,255,255,0.03); border-radius: 5px; }
 
-        input, textarea { width: 100%; padding: 15px; background: #111; border: 1px solid #333; color: white; border-radius: 8px; outline: none; transition: 0.3s; }
-        input:focus, textarea:focus { border-color: var(--primary); }
-        .submit-btn { background: var(--primary); border: none; padding: 15px; width: 100%; margin-top: 10px; cursor: pointer; font-weight: bold; border-radius: 8px; color: #000; transition: 0.3s; }
-        .submit-btn:hover { filter: brightness(1.2); }
+        input, textarea { width: 100%; padding: 12px; background: #111; border: 1px solid #333; color: white; border-radius: 8px; margin-bottom: 10px; outline: none; }
+        .btn-send { background: var(--primary); border: none; padding: 12px; width: 100%; font-weight: bold; cursor: pointer; border-radius: 8px; color: black; }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @media (max-width: 900px) { .grid-layout { grid-template-columns: 1fr; } }
+        @media (max-width: 1100px) { .grid-container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
+
+    <nav class="navbar" id="nav">
+        <a href="#" class="nav-logo">RFL•★•REAL</a>
+        <div class="nav-links">
+            <a href="#mural">Mural</a>
+            <a href="#ranking">Ranking</a>
+            <a href="#chat">Chat</a>
+        </div>
+    </nav>
 
     <section id="hero">
         <div class="parallax-bg" id="bg"></div>
         <div class="overlay"></div>
         <p class="brand-name">RFL•★•REAL</p>
         <h1 class="site-title">TOPO</h1>
-        <button class="enter-btn" onclick="iniciar()">ENTRAR NO SITE</button>
+        <button class="enter-btn" onclick="ativarSite()">INICIAR</button>
     </section>
 
-    <section id="main-content">
-        <div class="grid-layout">
-            <div class="mural-section">
-                <h2 style="margin-bottom: 20px; color: var(--primary);">MURAL RFL•★•REAL</h2>
-                <textarea id="post-text" rows="3" placeholder="O que está acontecendo no Avakin? (Cole links de fotos aqui também)"></textarea>
-                <button class="submit-btn" onclick="postar()">PUBLICAR AGORA</button>
-                <div id="mural-feed" style="margin-top: 30px;"></div>
-            </div>
+    <main id="main-content">
+        <div class="grid-container">
+            <aside class="glass-panel" id="ranking">
+                <h2>🏆 Mural de Honra</h2>
+                <div id="lista-ranking">
+                    <p>1º RFL•★•REAL 💎</p>
+                </div>
+            </aside>
 
-            <div class="chat-section">
-                <h2 style="margin-bottom: 20px; color: var(--primary);">CHAT GLOBAL</h2>
-                <div id="chat-messages"></div>
+            <section class="glass-panel" id="mural">
+                <h2>📸 Galeria TOPO</h2>
+                <textarea id="post-input" placeholder="Cole o link de uma imagem ou escreva um recado..."></textarea>
+                <button class="btn-send" onclick="enviarPost()">PUBLICAR</button>
+                <div id="feed-mural" style="margin-top: 30px;"></div>
+            </section>
+
+            <aside class="glass-panel" id="chat">
+                <h2>💬 Chat Global</h2>
+                <div id="chat-box"></div>
                 <input type="text" id="chat-input" placeholder="Sua mensagem...">
-                <button class="submit-btn" onclick="enviarChat()">ENVIAR CHAT</button>
-            </div>
+                <button class="btn-send" onclick="enviarChat()">ENVIAR</button>
+            </aside>
         </div>
-    </section>
+    </main>
 
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
 
     <script>
-        // --- CONFIGURAÇÃO DO FIREBASE (COLE SEUS DADOS AQUI) ---
+        // --- CONFIGURAÇÃO FIREBASE ---
         const firebaseConfig = {
             apiKey: "SUA_API_KEY",
             authDomain: "SEU_PROJETO.firebaseapp.com",
@@ -110,84 +136,69 @@
             messagingSenderId: "ID",
             appId: "APP_ID"
         };
-        
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        // FILTRO DE PALAVRAS (Adicione as que quiser bloquear)
-        const blacklist = ["palavra1", "palavra2", "ofensa"]; 
-
-        function filtrar(texto) {
-            let t = texto;
-            blacklist.forEach(p => {
-                const regex = new RegExp(p, "gi");
-                t = t.replace(regex, "****");
-            });
-            return t;
-        }
-
-        // PARALLAX
-        const bg = document.getElementById('bg');
-        document.addEventListener('mousemove', (e) => {
-            let x = e.clientX / window.innerWidth;
-            let y = e.clientY / window.innerHeight;
-            bg.style.transform = `translate(-${5 + x * 2}%, -${5 + y * 2}%)`;
-        });
-
-        function iniciar() {
+        function ativarSite() {
             document.getElementById('hero').style.display = 'none';
             document.getElementById('main-content').style.display = 'block';
+            document.getElementById('nav').style.display = 'flex';
             carregarDados();
         }
 
-        function deletar(id, colecao) {
-            const senha = prompt("Senha de Admin:");
-            if(senha === "123") { // Mude sua senha aqui!
-                db.collection(colecao).doc(id).delete();
-            }
+        // LÓGICA DE LIKES
+        function darLike(id, likesAtuais) {
+            db.collection("mural").doc(id).update({
+                likes: likesAtuais + 1
+            });
         }
 
         function carregarDados() {
+            // Mural com Likes
             db.collection("mural").orderBy("data", "desc").onSnapshot(snap => {
-                const feed = document.getElementById('mural-feed');
+                const feed = document.getElementById('feed-mural');
                 feed.innerHTML = "";
                 snap.forEach(doc => {
                     const p = doc.data();
                     const isImg = p.texto.match(/\.(jpeg|jpg|gif|png)$/) != null;
                     feed.innerHTML += `
-                        <div class="post-card ${p.admin ? 'post-admin' : ''}">
-                            ${p.admin ? '<span class="admin-badge">★ RFL•★•REAL (OFICIAL)</span>' : '<span style="opacity:0.5; font-size:0.8rem">Visitante Anônimo</span>'}
-                            <p style="margin-top:5px">${p.texto}</p>
+                        <div class="post-card">
+                            <p>${p.texto}</p>
                             ${isImg ? `<img src="${p.texto}" class="post-img">` : ''}
-                            <span class="delete-btn" onclick="deletar('${doc.id}', 'mural')">DELETAR</span>
+                            <div class="like-container">
+                                <button class="like-btn" onclick="darLike('${doc.id}', ${p.likes || 0})">❤ Curtir</button>
+                                <span class="like-count">${p.likes || 0} Likes</span>
+                            </div>
                         </div>`;
                 });
             });
 
+            // Chat
             db.collection("chat").orderBy("data", "asc").limit(50).onSnapshot(snap => {
-                const chat = document.getElementById('chat-messages');
-                chat.innerHTML = "";
+                const chatBox = document.getElementById('chat-box');
+                chatBox.innerHTML = "";
                 snap.forEach(doc => {
                     const m = doc.data();
-                    chat.innerHTML += `<div class="chat-msg"><b>${m.user}:</b> ${filtrar(m.texto)}</div>`;
+                    chatBox.innerHTML += `<div class="chat-msg"><b>Membro:</b> ${m.texto}</div>`;
                 });
-                chat.scrollTop = chat.scrollHeight;
+                chatBox.scrollTop = chatBox.scrollHeight;
             });
         }
 
-        function postar() {
-            const txt = document.getElementById('post-text').value;
-            if(!txt) return;
-            const adm = confirm("Postar como RFL•★•REAL?");
-            db.collection("mural").add({ texto: filtrar(txt), admin: adm, data: Date.now() });
-            document.getElementById('post-text').value = "";
+        function enviarPost() {
+            const txt = document.getElementById('post-input').value;
+            if(txt) {
+                db.collection("mural").add({ texto: txt, likes: 0, data: Date.now() });
+                document.getElementById('post-input').value = "";
+            }
         }
 
         function enviarChat() {
             const msg = document.getElementById('chat-input').value;
-            if(!msg) return;
-            db.collection("chat").add({ user: "Membro", texto: msg, data: Date.now() });
-            document.getElementById('chat-input').value = "";
+            if(msg) {
+                db.collection("chat").add({ texto: msg, data: Date.now() });
+                document.getElementById('chat-input').value = "";
+            }
         }
     </script>
 </body>
