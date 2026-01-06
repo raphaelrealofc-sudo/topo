@@ -3,119 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RFL•★•REAL | Bem-vindo ao Topo</title>
+    <title>RFL•★•REAL | Official Site</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            overflow: hidden; /* Para garantir que o efeito de blur funcione */
+            font-family: 'Inter', sans-serif;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); /* Fundo com gradiente noturno */
-            color: #ecf0f1; /* Cor de texto clara */
-            position: relative;
+            background: #050505; /* Fundo ultra escuro profissional */
+            overflow: hidden;
+            perspective: 1000px;
         }
 
-        /* Efeito de background com foco e desfoco (simulação com gradiente sutil) */
-        body::before {
-            content: '';
+        /* Fundo dinâmico com luzes suaves para efeito de profundidade */
+        .background-blobs {
             position: absolute;
-            top: -20%;
-            left: -20%;
-            width: 140%;
-            height: 140%;
-            background: radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-            animation: backgroundPan 20s infinite alternate linear;
-            filter: blur(5px); /* Efeito de desfoco */
+            width: 100%;
+            height: 100%;
             z-index: 0;
+            filter: blur(80px);
         }
 
-        @keyframes backgroundPan {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 100% 100%; }
+        .blob {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(103, 61, 230, 0.15); /* Roxo Hostinger sutil */
+            animation: move 15s infinite alternate ease-in-out;
         }
 
-        .content-wrapper {
+        @keyframes move {
+            from { transform: translate(-10%, -10%); }
+            to { transform: translate(100%, 80%); }
+        }
+
+        /* Efeito Vidro (Glassmorphism) */
+        .glass-card {
             position: relative;
-            z-index: 1; /* Garante que o conteúdo esteja acima do background */
+            z-index: 1;
+            padding: 4rem 5rem;
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(25px); /* Desfoco intenso de vidro */
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
             text-align: center;
-            background: rgba(0, 0, 0, 0.4); /* Fundo semi-transparente para o conteúdo */
-            padding: 3rem 4rem;
-            border-radius: 20px;
-            backdrop-filter: blur(8px); /* Blur para o conteúdo */
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            animation: fadeIn 2s forwards;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
+        /* Marca RFL•★•REAL */
         h1 {
-            font-size: 5rem; /* Nome da marca bem grande */
-            color: #ff8b15; /* Cor de destaque Hostinger */
+            font-size: 4.5rem;
+            font-weight: 900;
+            background: linear-gradient(180deg, #ffffff 0%, #a1a1a1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
             margin-bottom: 0.5rem;
-            letter-spacing: 2px;
-            text-shadow: 0 0 15px rgba(255, 139, 21, 0.7);
-            animation: pulse 2s infinite alternate ease-in-out;
+            animation: pulse-glow 3s infinite ease-in-out;
         }
 
+        /* Frase Bem-vindo ao Topo */
         .tagline {
-            font-size: 2rem; /* Frase de boas-vindas destacada */
-            color: #ecf0f1;
-            margin-top: 0;
-            margin-bottom: 2rem;
-            letter-spacing: 1px;
-            animation: pulse 2s infinite alternate ease-in-out 0.5s; /* Pulsação com delay */
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            margin-bottom: 3rem;
+            animation: pulse-glow 3s infinite ease-in-out 0.5s;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.02); opacity: 0.95; }
-            100% { transform: scale(1); opacity: 1; }
+        @keyframes pulse-glow {
+            0%, 100% { transform: scale(1); opacity: 1; filter: brightness(1); }
+            50% { transform: scale(1.02); opacity: 0.8; filter: brightness(1.3); }
         }
 
+        /* Botão Entrar Minimalista */
         .btn-enter {
             display: inline-block;
-            padding: 15px 40px;
-            background-color: #673de6; /* Cor roxa da Hostinger */
-            color: white;
+            padding: 1rem 3.5rem;
+            background: #ffffff;
+            color: #000000;
             text-decoration: none;
-            border-radius: 50px; /* Botão arredondado */
-            font-weight: bold;
-            font-size: 1.3rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid transparent;
         }
 
         .btn-enter:hover {
-            background-color: #5a2eca;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            background: transparent;
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.5);
         }
 
-        /* Responsividade básica */
+        /* Responsividade */
         @media (max-width: 768px) {
-            h1 { font-size: 3rem; }
-            .tagline { font-size: 1.5rem; }
-            .content-wrapper { padding: 2rem; }
-            .btn-enter { padding: 12px 30px; font-size: 1.1rem; }
+            h1 { font-size: 2.8rem; }
+            .tagline { font-size: 1rem; letter-spacing: 4px; }
+            .glass-card { padding: 3rem 2rem; width: 90%; }
         }
     </style>
 </head>
 <body>
 
-    <div class="content-wrapper">
+    <div class="background-blobs">
+        <div class="blob"></div>
+    </div>
+
+    <div class="glass-card">
         <h1>RFL•★•REAL</h1>
         <p class="tagline">Bem-vindo ao Topo</p>
-        <a href="#" class="btn-enter">Entrar</a>
+        <a href="seu-link-aqui.html" class="btn-enter">ENTRAR</a>
     </div>
 
 </body>
