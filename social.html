@@ -18,11 +18,9 @@
             flex-direction: column;
             align-items: center;
             overflow-x: hidden;
-            /* Espaço para o cabeçalho modular fixo */
             padding-top: 120px; 
         }
 
-        /* Container do Cabeçalho vindo do head.html */
         #header-placeholder {
             position: fixed;
             top: 0;
@@ -38,6 +36,33 @@
             width: 100%;
             height: 100%;
             z-index: 0;
+        }
+
+        /* Estilo do Botão de Postagem */
+        .btn-post {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: #00ff88;
+            color: #000;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: 900;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+            z-index: 1001; /* Acima de tudo */
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        .btn-post:hover { 
+            transform: scale(1.1) translateY(-5px); 
+            box-shadow: 0 0 30px #00ff88; 
         }
 
         /* Conteúdo Social */
@@ -68,7 +93,6 @@
             margin-bottom: 50px;
         }
 
-        /* Grade de Conexões */
         .hub-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -80,51 +104,33 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 15px;
             padding: 30px;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.4s;
             text-decoration: none;
             color: white;
             backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
         }
 
         .hub-item:hover {
-            transform: scale(1.05);
+            transform: translateY(-5px);
             background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .hub-item span { 
-            font-size: 2rem; 
-            margin-bottom: 15px; 
-            display: block; 
-            filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));
-        }
-
-        .hub-item h4 { 
-            font-size: 1.1rem; 
-            margin-bottom: 8px; 
-            letter-spacing: 1px; 
-            font-weight: 700;
-        }
-
-        .hub-item p { 
-            font-size: 0.75rem; 
-            color: rgba(255, 255, 255, 0.4); 
-            line-height: 1.4; 
+            border-color: rgba(0, 255, 136, 0.3);
         }
 
         @media (max-width: 600px) {
             .main-title { font-size: 2.2rem; }
-            .sub-title { letter-spacing: 2px; font-size: 0.8rem; }
-            body { padding-top: 150px; }
+            .btn-post p { display: none; } /* Esconde o texto no mobile, deixa só o + */
+            .btn-post { padding: 15px; border-radius: 50%; }
         }
     </style>
 </head>
 <body>
 
-    <div id="header-placeholder"></div>
+    <button class="btn-post" onclick="abrirModal()">
+        <span style="font-size: 1.5rem;">+</span>
+        <p>Nova Postagem</p>
+    </button>
 
+    <div id="header-placeholder"></div>
     <div id="particles-js"></div>
 
     <div class="social-container">
@@ -154,6 +160,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
+        // Configuração das Partículas
         particlesJS('particles-js', {
             "particles": {
                 "number": { "value": 40, "density": { "enable": true, "value_area": 800 } },
@@ -165,19 +172,15 @@
             }
         });
 
-        // LIGAÇÃO COM O CABEÇALHO MODULAR
+        // Integração do Cabeçalho
         fetch('cabecalho/head.html')
-            .then(response => {
-                if (!response.ok) throw new Error('Não foi possível carregar o head.html');
-                return response.text();
-            })
-            .then(data => {
-                document.getElementById('header-placeholder').innerHTML = data;
-            })
-            .catch(error => {
-                console.error('Erro na integração do cabeçalho:', error);
-            });
-    </script>
+            .then(response => response.text())
+            .then(data => document.getElementById('header-placeholder').innerHTML = data);
 
+        // Função do Botão (Ação)
+        function abrirModal() {
+            alert("RFL•★•SOCIAL: O sistema de upload de fotos está sendo conectado ao banco de dados!");
+        }
+    </script>
 </body>
 </html>
