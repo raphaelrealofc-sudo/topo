@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOPO | RFL•★•REAL</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="parallax-bg"></div>
+
+    <div class="overlay"></div>
+
+    <main class="hero">
+        <div class="brand-container">
+            <h2 class="brand-name">RFL•★•REAL</h2>
+            <h1 class="site-title">TOPO</h1>
+            <p class="tagline">Onde a comunidade Avakin Life se encontra.</p>
+        </div>
+
+        <button class="enter-btn" onclick="startExperience()">INICIAR JORNADA</button>
+    </main>
+
+    <audio id="bg-music" loop>
+        <source src="SUA_MUSICA_DO_AVAKIN.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        function startExperience() {
+            // Inicia a música
+            const audio = document.getElementById('bg-music');
+            audio.play().catch(e => console.log("Áudio aguardando interação."));
+            
+            // Aqui adicionaremos a lógica para rolar para o Feed/Chat
+            alert("Bem-vindo ao TOPO, RFL•★•REAL! O sistema está sendo carregado...");
+        }
+    </script>
+</body>
+</html>
